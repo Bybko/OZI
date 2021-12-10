@@ -1,4 +1,5 @@
 const express = require('express') //Импортируем express (для создания приложения)
+const path = require('path')
 const mongoose = require('mongoose') //Импорт mongoose (для работой с базой данных Mongo)
 const authRouter  = require('./authRouter')
 const PORT = process.env.PORT || 5000 //Создаём константу для хранения значения порта. Сначала получаем из системных переменных,
@@ -8,6 +9,9 @@ const app = express() //Создаём само приложение
 
 app.use(express.json()) //Чтобы парсить json, который будет в запросах
 app.use("/auth", authRouter) //Чтобы функция слушала этот роутер
+app.use("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'Main.html'))
+}) //Чтобы функция слушала этот роутер
 
 const start = async () => { //ф-ия запуска сервера (async т.к. операции с БД всегда асинхронные)
 	try { //try catch для отлавливание ошибок при вызове сервера

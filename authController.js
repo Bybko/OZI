@@ -23,18 +23,14 @@ const generateAccessToken = (id, roles) => {
 class authController {
 	async registration(req, res) { //У функций 2 параметра: запрос и ответ
 		try {
-
-
-            app.post('http://localhost:5000/auth/registration')
             console.log(req.body)
-
 
 			const errors = validationResult(req) 
             if (!errors.isEmpty()) { //Если массив ошибок не пустой, то вывести ошибку, и закончить 
                 return res.status(400).json({message: "Ошибка при регистрации", errors})
             }
 
-			//const {username, password} = req.body; //Берём логин и пароль из тела запроса
+			const {username, password} = req.body; //Берём логин и пароль из тела запроса
 			const candidate = await User.findOne({username}) //Кандидат, которого будем проверять на наличие в БД.
 			if (candidate) {
                 return res.status(400).json({message: "Пользователь с таким именем уже существует"}) //Результат проверки
