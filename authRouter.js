@@ -9,11 +9,13 @@ const bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 //Запрос и вызов соответстующей запросу функции:
+router.get('/registration', controller.getRegistration)
 router.post('/registration', urlencodedParser, [                                  //Запрос на регистрацию
 	//Валидируем на кол-во символов (чтобы логи и пароль не были пустыми, а также вводит ограничение на длину пароля)
     check('username', "Имя пользователя не может быть пустым").notEmpty(),
     check('password', "Пароль должен быть больше 4 и меньше 10 символов").isLength({min:4, max:10})
 ], controller.registration)
+router.get('/login', controller.getLogin)
 router.post('/login', urlencodedParser, controller.login) //Запрос на логин
 router.get('/users', controller.getUsers) //Запрос на различные доступы (разные уровни доступа)\
 

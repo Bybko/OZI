@@ -2,10 +2,11 @@
 const User = require('./models/User')
 const Role = require('./models/Role')
 
-const bcrypt = require('bcryptjs'); //Подключаем модуль хеширования паролей
+const bcrypt = require('bcryptjs') //Подключаем модуль хеширования паролей
 const { validationResult } = require('express-validator') //Из модуля валидатора экспортируем функцию, которая будет возвращать ошибки при валидации
-const jwt = require('jsonwebtoken'); //Импортируем модуль jwt токен
+const jwt = require('jsonwebtoken') //Импортируем модуль jwt токен
 const {secret} = require("./config") //Импортируем секретный ключ
+const path = require('path')
 
 
 //Функция для генерации токена, которая принимает айди и роли пользователя, чтобы спрятать эту информацию
@@ -21,10 +22,16 @@ const generateAccessToken = (id, roles) => {
 
 //Здесь описываем все функции по взаимодействию с пользователем
 class authController {
+    async getRegistration(req, res) {
+        try {
+            return res.sendFile(path.resolve(__dirname, 'registration.html'))
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
 	async registration(req, res) { //У функций 2 параметра: запрос и ответ
 		try {
-            console.log(req.body)
-
 			const errors = validationResult(req) 
             if (!errors.isEmpty()) { //Если массив ошибок не пустой, то вывести ошибку, и закончить 
                 return res.status(400).json({message: "Ошибка при регистрации", errors})
@@ -47,6 +54,14 @@ class authController {
             res.status(400).json({message: 'Registration error'}) 
 		}
 	}
+
+	async getLogin(req, res) {
+        try {
+            return res.sendFile(path.resolve(__dirname, 'login.html'))
+        } catch(e) {
+            console.log(e)
+        }
+    }
 
 	async login(req, res) {
 		try {
