@@ -7,10 +7,13 @@ const PORT = process.env.PORT || 5000 //Создаём константу для
 
 const app = express() //Создаём само приложение
 
+app.set('view engine', 'ejs')
+
+app.use('/public', express.static('public'))
 app.use(express.json()) //Чтобы парсить json, который будет в запросах
 app.use("/auth", authRouter) //Чтобы функция слушала этот роутер
 app.use("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'Main.html'))
+    res.render('Main')
 }) //Чтобы функция слушала этот роутер
 
 const start = async () => { //ф-ия запуска сервера (async т.к. операции с БД всегда асинхронные)

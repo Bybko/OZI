@@ -1,0 +1,26 @@
+#title {
+    text-align: center;
+    font-size: 50px;
+}
+
+.button-box {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    height: 60px;
+}
+
+.button-box a {
+    padding: 20px;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    color: #00CC99;
+    background-color: #000000;
+    border-radius: 8px;
+}
+
+.button-box a:hover {
+    background-color: #1c1c1c;
+    color: #00FFFF;
+}

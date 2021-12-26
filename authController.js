@@ -24,7 +24,7 @@ const generateAccessToken = (id, roles) => {
 class authController {
     async getRegistration(req, res) {
         try {
-            return res.sendFile(path.resolve(__dirname, 'registration.html'))
+            return res.render('registration')
         } catch(e) {
             console.log(e)
         }
@@ -57,7 +57,7 @@ class authController {
 
 	async getLogin(req, res) {
         try {
-            return res.sendFile(path.resolve(__dirname, 'login.html'))
+            return res.render('login')
         } catch(e) {
             console.log(e)
         }
